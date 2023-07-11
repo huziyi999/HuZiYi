@@ -125,7 +125,7 @@
        <div class="container py-lg-5 py-md-4">
            <div class="banner-info-grid px-md-5">
                <h2 class="w3l-title-breadcrumb mb-3">主题聚焦</h2>
-               <p class="inner-page-para px-lg-5">  传统风俗、文旅产业成关注焦点</p>
+               <p class="inner-page-para px-lg-5">  乡村振兴、风光旅游成关注焦点</p>
            </div>
        </div>
    </div>
@@ -166,85 +166,45 @@
 
    var option;
 
-   // prettier-ignore
-let dataAxis = ['乡村振兴', '人文风情', '风光旅游', '地域特色', '民俗非遗'];
-// prettier-ignore
-let data = [81, 56, 72, 49, 21];
-let yMax = 500;
-let dataShadow = [];
-for (let i = 0; i < data.length; i++) {
- dataShadow.push(yMax);
-}
 option = {
- {#title: {#}
- {#  text: '特性示例：渐变色 阴影 点击缩放',#}
- {#  subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'#}
- {#},#}
- xAxis: {
-   data: dataAxis,
-   axisLabel: {
-     inside: true,
-     color: '#fff'
-   },
-   axisTick: {
-     show: false
-   },
-   axisLine: {
-     show: false
-   },
-   z: 10
- },
- yAxis: {
-   axisLine: {
-     show: false
-   },
-   axisTick: {
-     show: false
-   },
-   axisLabel: {
-     color: '#999'
-   }
- },
- dataZoom: [
-   {
-     type: 'inside'
-   }
- ],
- series: [
-   {
-     type: 'bar',
-     showBackground: true,
-     itemStyle: {
-       color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-         { offset: 0, color: '#c6b7e1' },
-         { offset: 0.5, color: '#7854b8' },
-         { offset: 1, color: '#7854b8' }
-       ])
-     },
-     emphasis: {
-       itemStyle: {
-         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-           { offset: 0, color: '#2378f7' },
-           { offset: 0.7, color: '#2378f7' },
-           { offset: 1, color: '#83bff6' }
-         ])
-       }
-     },
-     data: data
-   }
- ]
+  dataset: {
+    source: [
+      ['amount', 'product'],
+      [81, '乡村振兴'],
+      [56, '人文风情'],
+      [72, '风光旅游'],
+      [49, '地域特色'],
+      [21, '民俗非遗']
+    ]
+  },
+  grid: { containLabel: true },
+  xAxis: { name: 'amount' },
+  yAxis: { type: 'category' },
+  visualMap: {
+    orient: 'horizontal',
+    left: 'center',
+    min: 10,
+    max: 100,
+    text: ['High Amount', 'Low Amount'],
+    // Map the score column to color
+    dimension: 0,
+    inRange: {
+      color: ['#65B581', '#FFCE34', '#FD665F']
+    }
+  },
+  series: [
+    {
+      type: 'bar',
+      encode: {
+        // Map the "amount" column to X axis.
+        x: 'amount',
+        // Map the "product" column to Y axis
+        y: 'product'
+      }
+    }
+  ]
 };
-// Enable data zoom when user click bar.
-const zoomSize = 6;
-myChart.on('click', function (params) {
- console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
- myChart.dispatchAction({
-   type: 'dataZoom',
-   startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
-   endValue:
-     dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
- });
-});
+
 
    if (option && typeof option === 'object') {
      myChart.setOption(option);
@@ -254,53 +214,16 @@ myChart.on('click', function (params) {
  </script>
 </section>
 
-<!-- //footer block -->
+<!-- footer block -->
 <footer class="w3l-footer-29-main">
-       <div class="container pt-md-4">
-{#            <div class="row footer-top-29">#}
-{#                <div class="col-lg-4 col-md-6 footer-list-29">#}
-{#                    <h6 class="footer-title-29">Contact Info </h6>#}
-{#                    <p class="mb-2 pe-xl-5">Address : Intelligence, 10001, 5th Avenue, #06 lane street, NY - 62617.#}
-{#                    </p>#}
-{#                    <p class="mb-2">Phone Number : <a href="tel:+1(21) 234 4567">+1(21) 234 4567</a></p>#}
-{#                    <p class="mb-2">Email : <a href="mailto:info@example.com">info@example.com</a></p>#}
-{#                    <p class="mb-2">Support : <a href="mailto:support@example.com">support@example.com</a></p>#}
-{#                </div>#}
-{#                <div class="col-lg-2 col-md-3 col-6 footer-list-29 mt-md-0 mt-4">#}
-{#                    <ul>#}
-{#                        <h6 class="footer-title-29">Quick Links</h6>#}
-{#                        <li><a href="about.html">About Company</a></li>#}
-{#                        <li><a href="#blog">Blog Posts</a></li>#}
-{#                        <li><a href="services.html">Our Services</a></li>#}
-{#                        <li><a href="contact.html">Contact Us</a></li>#}
-{#                        <li><a href="#shortcodes">Shortcodes</a></li>#}
-{#                    </ul>#}
-{#                </div>#}
-{#                <div class="col-lg-2 col-md-3 col-6 ps-lg-5 ps-lg-4 footer-list-29 mt-md-0 mt-4">#}
-{#                    <ul>#}
-{#                        <h6 class="footer-title-29">Explore</h6>#}
-{#                        <li><a href="#blog">Blog Posts</a></li>#}
-{#                        <li><a href="#privacy">Privacy policy</a></li>#}
-{#                        <li><a href="contact.html">Contact Us</a></li>#}
-{#                        <li><a href="#license">License & uses</a></li>#}
-{#                        <li><a href="#blog">View Articles</a></li>#}
-{#                    </ul>#}
-{#                </div>#}
-{#                <div class="col-lg-4 col-md-6 footer-list-29 mt-lg-0 mt-4 ps-lg-5">#}
-{#                    <h6 class="footer-title-29">Subscribe</h6>#}
-{#                    <form action="#" class="subscribe d-flex" method="post">#}
-{#                        <input type="email" name="email" placeholder="Email Address" required="">#}
-{#                        <button class="button-style"><span class="fa fa-paper-plane"#}
-{#                                aria-hidden="true"></span></button>#}
-{#                    </form>#}
-{#                    <p class="mt-4">Subscribe to our mailing list and get updates to your email inbox.</p>#}
-{#                </div>#}
-{#            </div>#}
-           <!-- copyright -->
-           <p class="copy-footer-29 text-center mt-5 pb-2">© 22301203 胡紫怡（hzy）. 主题分布. </p>
-           <!-- //copyright -->
-       </div>
-   </div>
+        <div class="container pt-md-4">
+            <div class="row footer-top-29">
+            </div>
+            <!-- copyright -->
+            <p class="copy-footer-29 text-center mt-5 pb-2">© 22301203 胡紫怡（hzy）. 主题分布. </p>
+            <!-- //copyright -->
+        </div>
+</footer>
 <!-- //footer block -->
 
 
